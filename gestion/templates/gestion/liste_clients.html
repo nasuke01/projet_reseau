@@ -1,0 +1,44 @@
+{% extends 'gestion/base.html' %}
+
+{% block title %}Liste des Clients{% endblock %}
+
+{% block content %}
+    <h2 class="mb-3">Liste des Clients</h2>
+    <a href="{% url 'ajouter_client' %}" class="btn btn-primary mb-3">Ajouter un Client</a>
+
+    {% if messages %}
+        <div class="container mt-3">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Email</th>
+                <th>Téléphone</th>
+                <th>Adresse</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for client in clients %}
+            <tr>
+                <td>{{ client.nom }}</td>
+                <td>{{ client.prenom }}</td>
+                <td>{{ client.email }}</td>
+                <td>{{ client.telephone }}</td>
+                <td>{{ client.adresse }}</td>
+                <td>
+                    <a href="{% url 'modifier_client' client.id %}" class="btn btn-warning btn-sm">Modifier</a>
+                    <a href="{% url 'supprimer_client' client.id %}" class="btn btn-danger btn-sm">Supprimer</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

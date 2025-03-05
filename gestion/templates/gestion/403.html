@@ -1,0 +1,9 @@
+{% extends "gestion/base.html" %}
+
+{% block content %}
+    <div class="container text-center mt-5">
+        <h1 class="text-danger">🚫 Accès Interdit (403)</h1>
+        <p>Vous n'avez pas les permissions nécessaires pour accéder à cette page.</p>
+        <a href="{% url 'home' %}" class="btn btn-primary">Retour à l'accueil</a>
+    </div>
+{% endblock %}

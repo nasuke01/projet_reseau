@@ -1,0 +1,39 @@
+{% extends 'gestion/base.html' %}
+
+{% block title %}Liste des Documents{% endblock %}
+
+{% block content %}
+    <h2 class="mb-3">Liste des Documents</h2>
+    <a href="{% url 'ajouter_document' %}" class="btn btn-primary mb-3">Ajouter un Document</a>
+
+    {% if messages %}
+        <div class="container mt-3">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Titre</th>
+                <th>Fichier</th>
+                <th>Date de Création</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for document in documents %}
+            <tr>
+                <td>{{ document.titre }}</td>
+                <td><a href="{% url 'telecharger_document' document.id %}" class="btn btn-info btn-sm">Télécharger</a></td>
+                <td>{{ document.date_creation }}</td>
+                <td>
+                    <a href="{% url 'supprimer_document' document.id %}" class="btn btn-danger btn-sm">Supprimer</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

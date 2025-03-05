@@ -1,0 +1,27 @@
+{% extends 'gestion/base.html' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block content %}
+    <div class="container text-center mt-5">
+        <h1>Bienvenue sur la plateforme de gestion</h1>
+        <p class="lead">Vous êtes connecté en tant que <strong>{{ role }}</strong>.</p>
+
+        <div class="mt-4">
+            {% if role == "Admin" %}
+                <a href="{% url 'liste_employes' %}" class="btn btn-primary">Gérer les Employés</a>
+                <a href="{% url 'liste_clients' %}" class="btn btn-success">Gérer les Clients</a>
+                <a href="{% url 'liste_documents' %}" class="btn btn-info">Gérer les Documents</a>
+            {% elif role == "Employé" %}
+                <a href="{% url 'liste_clients' %}" class="btn btn-success">Gérer les Clients</a>
+                <a href="{% url 'liste_documents' %}" class="btn btn-info">Gérer les Documents</a>
+            {% else %}
+                <a href="{% url 'liste_documents' %}" class="btn btn-info">Voir les Documents</a>
+            {% endif %}
+        </div>
+
+        <div class="mt-5">
+            <a href="{% url 'deconnexion' %}" class="btn btn-danger">Se Déconnecter</a>
+        </div>
+    </div>
+{% endblock %}
